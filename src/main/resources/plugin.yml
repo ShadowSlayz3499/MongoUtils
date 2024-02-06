@@ -1,0 +1,4 @@
+name: MongoUtils
+version: '${version}'
+main: me.shzdow.mongoutils.MongoUtils
+api-version: 1.20
