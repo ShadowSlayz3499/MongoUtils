@@ -35,7 +35,9 @@ public class DocumentQuery<TDocument> implements Query<TDocument> {
 
     @Override
     public Collection<TDocument> queryAll() {
-        return null;
+        List<TDocument> queried = new ArrayList<>();
+        queryAndIterate(queried::add);
+        return queried;
     }
 
     @Override

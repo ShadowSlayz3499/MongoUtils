@@ -1,6 +1,7 @@
 package me.shzdow.mongoutils;
 
 import com.mongodb.ConnectionString;
+import com.mongodb.LoggerSettings;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoClient;
@@ -19,6 +20,10 @@ public class MongoUtils {
 
     public static MongoUtils connectByURL(@NotNull String url) {
         return new MongoUtils(url);
+    }
+
+    public static MongoUtils connectByURLWithCustomSettings(@NotNull String url, MongoClientSettings.Builder mongoSettings) {
+        return new MongoUtils(url, mongoSettings);
     }
 
     public static MongoUtils connectByCredential(@NotNull MongoCredential credential) {
@@ -43,6 +48,10 @@ public class MongoUtils {
 
     private MongoUtils(@NotNull String url) {
         this(generateDefaultSettings().applyConnectionString(new ConnectionString(url)).build());
+    }
+
+    private MongoUtils(@NotNull String url, MongoClientSettings.Builder mongoSettings) {
+        this(mongoSettings.applyConnectionString(new ConnectionString(url)).build());
     }
 
     public MongoUtils(@NotNull MongoClientSettings mongoClientSettings) {
